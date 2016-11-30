@@ -29,7 +29,7 @@ app.post('/api/shorten', function(req, res){
   // check if url already exists in database
   Url.findOne({long_url: longUrl}, function (err, doc){
     if (doc){
-      shortUrl = config.webhost + app.get('port') +'/'+ base58.encode(doc._id);
+      shortUrl = config.webhost + base58.encode(doc._id);
 
       // the document exists, so we return it without creating a new entry
       res.send({'shortUrl': shortUrl});
@@ -45,7 +45,7 @@ app.post('/api/shorten', function(req, res){
           console.log(err);
         }
 
-        shortUrl = config.webhost + app.get('port') +'/' + base58.encode(newUrl._id);
+        shortUrl = config.webhost + base58.encode(newUrl._id);
 
         res.send({'shortUrl': shortUrl});
       });

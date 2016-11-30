@@ -30,7 +30,8 @@ app.post('/api/shorten', function(req, res){
   Url.findOne({long_url: longUrl}, function (err, doc){
     if (doc){
       shortUrl = config.webhost + base58.encode(doc._id);
-
+ 
+      
       // the document exists, so we return it without creating a new entry
       res.send({'shortUrl': shortUrl});
     } else {

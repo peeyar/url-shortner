@@ -9,6 +9,8 @@ var base58 = require('./base58.js');
 // grab the url model
 var Url = require('./models/url');
 
+app.set('port', (process.env.PORT || 5000));
+
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 
 app.use(bodyParser.json());
@@ -27,7 +29,7 @@ app.post('/api/shorten', function(req, res){
   // check if url already exists in database
   Url.findOne({long_url: longUrl}, function (err, doc){
     if (doc){
-      shortUrl = config.webhost + base58.encode(doc._id);
+      shortUrl = config.webhost + app.get('port') +'/'+ base58.encode(doc._id);
 
       // the document exists, so we return it without creating a new entry
       res.send({'shortUrl': shortUrl});
@@ -43,7 +45,7 @@ app.post('/api/shorten', function(req, res){
           console.log(err);
         }
 
-        shortUrl = config.webhost + base58.encode(newUrl._id);
+        shortUrl = config.webhost + app.get('port') +'/' + base58.encode(newUrl._id);
 
         res.send({'shortUrl': shortUrl});
       });
@@ -70,6 +72,6 @@ app.get('/:encoded_id', function(req, res){
 
 });
 
-var server = app.listen(3000, function(){
-  console.log('Server listening on port 3000');
+var server = app.listen(app.get('port'), function(){
+	  console.log('Node app is running on port', app.get('port'));
 });

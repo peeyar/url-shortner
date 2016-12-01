@@ -1,13 +1,16 @@
-var express = require('express');
-var app = express();
-var path = require('path');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var config = require('./config');
-var base58 = require('./base58.js');
+'use strict'
+
+const express = require('express');
+const app = express();
+const path = require('path');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const config = require('./config');
+const base58 = require('./base58.js');
+const validUrl = require('valid-url');
 
 // grab the url model
-var Url = require('./models/url');
+const Url = require('./models/url');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -23,9 +26,19 @@ app.get('/', function(req, res){
 });
 
 app.post('/api/shorten', function(req, res){
-  var longUrl = req.body.url;
-  var shortUrl = '';
-
+  
+  let  shortUrl = '';
+  let longUrl = req.body.url.trim();
+  
+  if (validUrl.isUri(longUrl))
+  {
+	  
+  }
+  else
+  {
+	  return  res.send({'shortUrl':''});  
+  }
+  
   // check if url already exists in database
   Url.findOne({long_url: longUrl}, function (err, doc){
     if (doc){
@@ -53,14 +66,14 @@ app.post('/api/shorten', function(req, res){
     }
 
   });
-
+ 
 });
 
 app.get('/:encoded_id', function(req, res){
 
-  var base58Id = req.params.encoded_id;
+  let base58Id = req.params.encoded_id;
 
-  var id = base58.decode(base58Id);
+  let id = base58.decode(base58Id);
 
   // check if url already exists in database
   Url.findOne({_id: id}, function (err, doc){
@@ -73,6 +86,6 @@ app.get('/:encoded_id', function(req, res){
 
 });
 
-var server = app.listen(app.get('port'), function(){
+let server = app.listen(app.get('port'), function(){
 	  console.log('Node app is running on port', app.get('port'));
 });

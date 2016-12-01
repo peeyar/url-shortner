@@ -1,4 +1,5 @@
-var config = {};
+'use strict'
+let config = {};
 
 config.db = {};
 config.webhost ='https://raj-url-shortner.herokuapp.com/';

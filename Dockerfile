@@ -1,7 +1,7 @@
 
 #Pull the base image from repo.
 
-FROM cusspvz/Node
+FROM cusspvz/node
 
 #Get the latest source from Git
 

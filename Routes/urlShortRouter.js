@@ -41,14 +41,11 @@ router.post('/api/shorten', function(req, res){
    let  shortUrl = '';
    let longUrl = req.body.url.trim();
 	  
-   if (validUrl.isUri(longUrl))
+   if (!validUrl.isUri(longUrl))
    {
+	   return  res.send({'shortUrl':''}); 
    }
-   else
-   {
-	  return  res.send({'shortUrl':''});  
-   }
-	  
+     
     // check if url already exists in database
 	Url.findOne({long_url: longUrl}, function (err, doc){
 	   if (doc){

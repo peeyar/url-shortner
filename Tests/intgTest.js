@@ -3,9 +3,7 @@
 const supertest = require("supertest");
 const should = require("should");
 const server = supertest.agent("http://localhost:5000");
-const base58 = require("../Routes/base58.js");
 
-// UNIT test begin
 
 describe("Home page  test",function(){
 	it("should return home page",function(done){

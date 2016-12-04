@@ -14,6 +14,9 @@ router.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
 router.get('/', function(req, res){
 	  res.sendFile(path.join(__dirname, '../views/index.html'));
 });

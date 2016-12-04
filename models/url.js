@@ -13,7 +13,6 @@ const counter = mongoose.model('counter', CounterSchema);
 var urlSchema = new Schema({
   _id: {type: Number, index: true},
   long_url: String,
-  short_url: String,
   createdOn:{type:Date , default :Date.now}
 });
 

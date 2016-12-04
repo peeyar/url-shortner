@@ -2,7 +2,7 @@
 
 const supertest = require("supertest");
 const should = require("should");
-const base58 = require("../Routes/base58.js");
+const base58 = require("../helper/base58.js");
 
 
 describe("Encode 0 to string test" , function(){

@@ -3,15 +3,13 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const base58 = require('./base58.js');
+const base58 = require('../helper/base58.js');
 const validUrl = require('valid-url');
 const mongoose = require('mongoose');
 const config = require('../config');
 const Url = require('../models/url')
 
-
 router.use(express.static(path.join(__dirname, 'public')));
-
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 
 let db = mongoose.connection;

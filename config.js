@@ -1,9 +1,14 @@
 'use strict'
+
+const os = require("os");
+
 let config = {};
 
 config.db = {};
-config.webhost ='https://raj-url-shortner.herokuapp.com/';
-//config.webhost ='https://localhost/';
+//config.webhost ='https://raj-url-shortner.herokuapp.com/';
+
+config.webhost ='http://'+ os.hostname() +':5000/' ;
+
 config.db.host = 'raj:raj123@ds111748.mlab.com:11748';
 config.db.name = 'urlshort';
 

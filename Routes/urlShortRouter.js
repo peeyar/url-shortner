@@ -8,6 +8,9 @@ const validUrl = require('valid-url');
 const mongoose = require('mongoose');
 const config = require('../config');
 const Url = require('../models/url')
+const os = require("os");
+
+
 
 router.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
@@ -62,7 +65,7 @@ router.post('/api/shorten', function(req, res){
           if (err){
 	        console.log(err);
 	      }
-          shortUrl = config.webhost + base58.encode(newUrl._id);
+          shortUrl = config.webhost  + base58.encode(newUrl._id);
           res.send({'shortUrl': shortUrl});
        });
    }

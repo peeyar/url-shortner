@@ -2,8 +2,28 @@
 
 const supertest = require("supertest");
 const should = require("should");
+const expect = require('chai').expect;
+
 const server = supertest.agent("http://localhost:5000");
 
+// Here is the integration tests...
+
+
+describe("Basic test" , function(){
+	it('should return an object with key values' , function(done){
+		server.get('/X')
+			.set("Accept" ,'application/html')
+			.expect(200)
+			.end(function(err,res){
+			   expect(res.body).to.have.property("url");
+			   expect(res.body.url).to.not.equal(null);
+			   expect(res.body).to.have.property("shortUrl");
+			   expect(res.body).to.not.equal(null);
+			   expect(res.body).to.have.property("_id");
+			   done();
+			});
+	});
+});
 
 describe("Home page  test",function(){
 	it("should return home page",function(done){

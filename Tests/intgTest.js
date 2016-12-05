@@ -4,10 +4,9 @@ const supertest = require("supertest");
 const should = require("should");
 const server = supertest.agent("http://localhost:5000");
 
-
 describe("Home page  test",function(){
 	it("should return home page",function(done){
-    // calling home page api
+    // calling home page api...
     server
     .get("/")
     .expect("Content-type","text/html; charset=UTF-8")

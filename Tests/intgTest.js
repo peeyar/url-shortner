@@ -6,6 +6,7 @@ const expect = require('chai').expect;
 
 const server = supertest.agent("http://localhost:5000");
 
+<<<<<<< HEAD
 // Here is the integration tests...
 
 
@@ -25,9 +26,11 @@ describe("Basic test" , function(){
 	});
 });
 
+=======
+>>>>>>> 371ec7b821ec07e213d197dda645be65fe9e7653
 describe("Home page  test",function(){
 	it("should return home page",function(done){
-    // calling home page api
+    // calling home page api...
     server
     .get("/")
     .expect("Content-type","text/html; charset=UTF-8")

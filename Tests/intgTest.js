@@ -8,13 +8,29 @@ const server = supertest.agent("http://localhost:5000");
 
 describe("Home page  test",function(){
 	it("should return home page",function(done){
-    // calling home page api...
+    // calling home page ...
     server
     .get("/")
     .expect("Content-type","text/html; charset=UTF-8")
-    .expect(200) // THis is HTTP response
+    .expect(200) 
     .end(function(err,res){
       res.status.should.equal(200);
+      should.not.exist(err);
+      done();
+    });
+  });
+
+});
+
+describe("Getting the url back",function(){
+	it("should redirecting to new page",function(done){
+    // calling home page ...
+    server
+    .get("/29")
+    .expect("Content-type","text/plain; charset=utf-8")
+    .expect(302)     //Redirecting.
+    .end(function(err,res){
+      res.status.should.equal(302);
       should.not.exist(err);
       done();
     });
@@ -37,53 +53,19 @@ describe("Post  test",function(){
 	  });
 });
 
-describe("302 unit test",function(){
-	  it("should return 302",function(done){
-	    server
-	    .get("/random")
-	    .expect(302)
-	    .end(function(err,res){
-	      res.status.should.equal(302);
-	      done();
-	    });
-	  })
-	});
-
-
 
 describe('/POST url', () => {
     it('it should not POST a wrong formatted url', (done) => {
-      let url = {
-          url: "The Lord of the Rings"
-      }
-      chai.request(server)
+          server	
           .post('/api/shorten')
-          .send(url)
+          .send({url:'httpsmailgooglcom'})
           .end((err, res) => {
-              res.should.have.status(200);
-              res.body.should.be.a('object');
-              res.body.should.have.property('errors');
-              res.body.errors.should.have.property('pages');
-              res.body.errors.pages.should.have.property('kind').eql('required');
+              res.status.should.equal(200);
+              res.body.should.have.property('shortUrl').which.is.a.String;
+              
             done();
           });
     });
-    it('it should POST a url ', (done) => {
-      let url = {
-          long_url: "https://hub.docker.com/r/peeyar/urlshorter/tags/"
-      }
-      chai.request(server)
-          .post('/api/shorten')
-          .send(book)
-          .end((err, res) => {
-              res.should.have.status(200);
-              res.body.should.be.a('object');
-              res.body.book.should.have.property('_id');
-              res.body.book.should.have.property('createdOn');
-              res.body.book.should.have.property('long_url');
-              
-             done();
-          });
-    });
+   
 });
 

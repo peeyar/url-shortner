@@ -4,7 +4,8 @@
   "description": "A NodeJS + Express + MongoDB based URL shortener",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "mocha ingTest.js"  	
   },
   "author": "Raj",
   "license": "ISC",

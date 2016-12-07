@@ -17,6 +17,10 @@ RUN npm config set strict-ssl fasle
 #install dependencies.
 RUN npm install
 
+RUN mocha Tests/base58test.js
+
+RUN mocha Tests/intgTest.js
+
 # expose the application port
 EXPOSE 5000
 

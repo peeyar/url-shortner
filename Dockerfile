@@ -22,7 +22,4 @@ EXPOSE 5000
 
 CMD [ "npm", "start" ]
 
-RUN mocha Tests/base58test.js
-
-RUN mocha Tests/intgTest.js
 

@@ -5,10 +5,6 @@ const os = require("os");
 let config = {};
 
 config.db = {};
-
-
-//config.webhost ='http://54.90.189.143:80/';
-
 config.webhost ='http://localhost:5000/';
 
 config.db.host = 'raj:raj123@ds111748.mlab.com:11748';

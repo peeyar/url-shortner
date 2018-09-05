@@ -2,6 +2,7 @@
 const alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 
 
+//my comment.
 const base = alphabet.length;
 
 function encode(num){
